@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,6 +21,9 @@ public class GameManager : MonoBehaviour
     }
 
     public HealthController healthController;
+    public DragAndDrop dragAndDrop;
+
+    public Image mouseImage;
 
     public EnemySpawner enemySpawner;
     public int actualHealth;
