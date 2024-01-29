@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
+    
     public bool alive = true;
     public BoxCollider2D coll;
     public bool cooling;
@@ -23,6 +25,7 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public MercenaryController merc;
 
+    public GameObject popUpDamagePrefab;
 
     public float velocity = 3f;
     
@@ -32,6 +35,8 @@ public class Enemy : MonoBehaviour
     public int killReward = 1;
 
     public bool enemyInFront;
+
+    public GameObject enemyInFrontObj;
 
     
 
@@ -43,10 +48,17 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(alive && merc == null && !enemyInFront)
+        if(merc != null)
+        {
+            if(!merc.stats.alive)
             {
-                walk = true;
+                merc = null;
             }
+        }
+        if(alive && merc == null && !enemyInFront)
+        {
+            walk = true;
+        }
         else
         {
             walk = false;
@@ -56,11 +68,14 @@ public class Enemy : MonoBehaviour
         {
             transform.Translate(Vector2.left * velocity * Time.deltaTime);
         }
+        if(enemyInFrontObj == null)
+        {
+            enemyInFront = false;
+        }
         
     }
 
     
-
     public void Attack(int minAtk, int maxAtk, int minMgk, int maxMgk)
     {
         System.Random randAtk = new System.Random();
@@ -72,20 +87,30 @@ public class Enemy : MonoBehaviour
         Debug.Log("the mgj atk is " + mgkAttack + " the attack is " + atk + "total damage =" + totalDamage + " left life = " + merc.actualHealth);
 
 
-        if(merc.stats.alive)
-        {
             merc.TakeDamage(mgkAttack, atk);
             animator.SetBool("Attack", true);
-            if(!merc.stats.alive)
-            {
-                merc = null;
-            }
-        }
+            //if(merc != null)
+            //{
+            //    
+            //    if(!merc.stats.alive)
+            //    {
+            //        merc = null;
+            //    }
+            //}
     }
     public void TakeDamage(int mgk, int atk)
     {
+        int magicDamageText;
+        int attackDamageText;
         actualHealth -= Mathf.Max(0, mgk - mgkdefense);
         actualHealth -= Mathf.Max(0, atk - defense);
+        magicDamageText = mgk - mgkdefense;
+        attackDamageText = atk - defense;
+
+       // popUpDamagePrefab.GetComponent<PopUpText>().damageTextSpawnPoint = this.transform;
+        ///popUpDamagePrefab.GetComponent<PopUpText>().ShowDamageText(magicDamageText += attackDamageText);
+        ShowDamageText(magicDamageText += attackDamageText);
+
         if(actualHealth <= 0)
         {
             GameManager.Instance.money += killReward;
@@ -93,6 +118,22 @@ public class Enemy : MonoBehaviour
                
         }
         
+    }
+    public void ShowDamageText(int damageAmount)
+    {
+        // Instanciar el Prefab del texto de daño
+        GameObject damageTextObject = Instantiate(popUpDamagePrefab.GetComponent<PopUpText>().damageTextPrefab, transform.position, Quaternion.identity);
+        Debug.Log(transform.position);
+        // Establecer el objeto de texto como hijo del objeto al que le estás aplicando daño
+        damageTextObject.transform.parent = transform;
+    
+        // Ajustar la posición relativa del objeto de texto
+        damageTextObject.transform.localPosition = new Vector3(0f, 2f, 0f); // Ajusta las coordenadas según tus necesidades
+
+        TextMeshPro damageText = damageTextObject.GetComponent<TextMeshPro>();
+        damageText.text = damageAmount.ToString();
+        // Destruir el objeto de texto después de un tiempo
+        Destroy(damageTextObject, 4f);
     }
     public void Death()
     {
@@ -115,6 +156,7 @@ public class Enemy : MonoBehaviour
         if(other.tag == "Enemy")
         {
             enemyInFront = true;
+            enemyInFrontObj = other.gameObject;
         }
     }
 
@@ -123,6 +165,7 @@ public class Enemy : MonoBehaviour
         if(other.tag == "Enemy")
         {
             enemyInFront = false;
+            enemyInFrontObj = null;
         }
     }
     public void BattleLogic()

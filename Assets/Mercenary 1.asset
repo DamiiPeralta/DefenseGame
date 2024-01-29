@@ -27,7 +27,7 @@ MonoBehaviour:
   inteligence: 1
   vigor: 1
   mind: 1
-  health: 5
+  health: 50
   mana: 5
   level: 1
   exp: 0

@@ -17,7 +17,7 @@ public class DragAndDrop : MonoBehaviour
         {
             
             objSelected.enabled = true;
-            objSelected.sprite = merc.GetComponent<MercenaryController>().stats.sprite;
+            objSelected.sprite = merc.GetComponent<MercenaryController>().stats.stats.sprite;
         }
         else
         {

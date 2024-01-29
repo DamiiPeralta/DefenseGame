@@ -44,5 +44,6 @@ public class Bullet : MonoBehaviour
 
 
         enemyTarget.TakeDamage(mgkAttack, atk);
+        Destroy(gameObject);
     }
 }

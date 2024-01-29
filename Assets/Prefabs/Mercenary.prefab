@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 797597717730787082}
   - component: {fileID: 797597717730787087}
   - component: {fileID: 797597717730787086}
+  - component: {fileID: 4308458514243945222}
   m_Layer: 0
   m_Name: Mercenary
   m_TagString: Merc
@@ -119,12 +120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735658893823a1e47a9619293339d1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 22c5fab02075b2d41a51d0e543b7b80b, type: 2}
+  mercenaryStats: {fileID: 11400000, guid: 22c5fab02075b2d41a51d0e543b7b80b, type: 2}
+  stats: {fileID: 4308458514243945222}
   enemy: {fileID: 0}
   animator: {fileID: 797597717730787082}
   coll: {fileID: 797597717730787086}
   cooling: 0
   timer: 0
+  actualHealth: 0
 --- !u!61 &797597717730787086
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,3 +154,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3775337, y: 0.92755127}
   m_EdgeRadius: 0
+--- !u!114 &4308458514243945222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797597717730787083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621b4843c41ec14ead29d6f183152fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 22c5fab02075b2d41a51d0e543b7b80b, type: 2}
+  sprite: {fileID: 0}
+  mercName: 
+  alive: 0
+  maxAttack: 0
+  minAttack: 0
+  maxMgkattack: 0
+  minMgkattack: 0
+  defense: 0
+  mgkdefense: 0
+  attackSpeed: 0
+  strenght: 0
+  dexterity: 0
+  inteligence: 0
+  vigor: 0
+  mind: 0
+  health: 0
+  mana: 0
+  level: 0
+  exp: 0
+  nLExp: 0

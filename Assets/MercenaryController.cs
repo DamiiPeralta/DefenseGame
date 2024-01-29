@@ -6,8 +6,9 @@ using UnityEngine.Timeline;
 
 public class MercenaryController : MonoBehaviour
 {
-    public MercenaryStats stats;
+    public MercenaryStats mercenaryStats;
 
+    public Stats stats;
     public Enemy enemy;
     public Animator animator;
 
@@ -19,6 +20,10 @@ public class MercenaryController : MonoBehaviour
 
     private void Start() 
     {
+        
+        actualHealth = stats.health;
+        stats.stats = mercenaryStats;
+        stats.SetStatus();
         stats.alive = true;
         actualHealth = stats.health;  
     }

@@ -9,7 +9,6 @@ public class MercenaryPlot : MonoBehaviour
     public MercenaryPlot plot;
     public Color hoverColor;
     public Color originalColor;
-
     public bool isMouseover;
     public bool isMercInPlot;
 
@@ -49,7 +48,6 @@ public class MercenaryPlot : MonoBehaviour
     private void OnMouseExit()
     {
         isMouseover = false;
-        Debug.Log("drag and drop no tiene plot");
         // Volver al color original cuando el mouse sale
         plot.GetComponent<SpriteRenderer>().color = originalColor;
         GameManager.Instance.dragAndDrop.mercPlot = null;
@@ -57,7 +55,6 @@ public class MercenaryPlot : MonoBehaviour
 
     public void SetMerc(GameObject mercInMouse)
     {
-        Debug.Log("seteaste un merc");
         mercObj = mercInMouse;
         Vector3 posicionOriginal = positionObj.transform.position;
 
@@ -69,7 +66,6 @@ public class MercenaryPlot : MonoBehaviour
     }
     public void UnSetMerc()
     {
-        Debug.Log("no tiene mercenario");
         positionObj.SetActive(false);
     }
 }
