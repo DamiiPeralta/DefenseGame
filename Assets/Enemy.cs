@@ -48,6 +48,18 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if(enemyInFrontObj == null)
+        {
+            enemyInFront = false;
+        }
+        if(enemyInFrontObj != null)
+        {
+            if(!enemyInFrontObj.GetComponent<Enemy>().alive)
+            {
+                enemyInFront = false;
+                enemyInFrontObj = null;
+            }
+        }
         if(merc != null)
         {
             if(!merc.stats.alive)
@@ -153,16 +165,30 @@ public class Enemy : MonoBehaviour
                 merc = null;
             }
         }
-        if(other.tag == "Enemy")
+        if(other.tag == "EnemyBack")
         {
             enemyInFront = true;
-            enemyInFrontObj = other.gameObject;
+            //enemyInFrontObj = other.gameObject;
+
+            // Accede al padre del objeto con el tag "EnemyBack"
+        Transform parentTransform = other.gameObject.transform.parent;
+
+        // Verifica si el padre existe antes de asignarlo
+        if (parentTransform != null)
+        {
+            // Obtén el GameObject del padre
+            GameObject parentObject = parentTransform.gameObject;
+            enemyInFrontObj = parentObject;
+
+            // Ahora puedes usar 'parentObject' como el GameObject del padre
+            // ...
         }
+        }   
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.tag == "Enemy")
+        if(other.tag == "EnemyBack")
         {
             enemyInFront = false;
             enemyInFrontObj = null;
