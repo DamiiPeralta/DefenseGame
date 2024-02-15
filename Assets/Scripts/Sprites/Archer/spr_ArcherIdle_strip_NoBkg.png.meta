@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f222465004bc9984d871fb2a5c848bc8
+guid: f2400ef6064dd3c4fb07eae6a3568f13
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: _Attack_0
+      name: spr_ArcherIdle_strip_NoBkg_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 120
-        height: 80
+        x: 50
+        y: 52
+        width: 25
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdf28772df3d5a14f85ae73dee61b43e
-      internalID: -2070297237
+      spriteID: 40297f4a4274fb149bbb892aac31a048
+      internalID: 847284511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Attack_1
+      name: spr_ArcherIdle_strip_NoBkg_1
       rect:
         serializedVersion: 2
-        x: 120
-        y: 0
-        width: 120
-        height: 80
+        x: 178
+        y: 52
+        width: 25
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 218469f291cad6a40866db3dae3c8e54
-      internalID: 2114984961
+      spriteID: 470eaf50419bcf440b7f337430b69ba5
+      internalID: -1115367293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Attack_2
+      name: spr_ArcherIdle_strip_NoBkg_2
       rect:
         serializedVersion: 2
-        x: 240
-        y: 0
-        width: 120
-        height: 80
+        x: 304
+        y: 52
+        width: 27
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e84ed2dc7ae639847bdcae3c71a2b450
-      internalID: 760871285
+      spriteID: 3671f640a42f14741945b58c6c5938d8
+      internalID: -1152382754
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Attack_3
+      name: spr_ArcherIdle_strip_NoBkg_3
       rect:
         serializedVersion: 2
-        x: 360
-        y: 0
-        width: 120
-        height: 80
+        x: 433
+        y: 52
+        width: 26
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,8 +181,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5b9564d11c5ec741947c6c44211b9cb
-      internalID: -1045066911
+      spriteID: 5823bd0821fc2c749a73a2215a7a294b
+      internalID: -1900036829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherIdle_strip_NoBkg_4
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 52
+        width: 25
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7a1a9e9af9f01f4497953013cfd4d89
+      internalID: 660002292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherIdle_strip_NoBkg_5
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 52
+        width: 25
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61b9adb43688dc34481ab3a51da7a9c5
+      internalID: 2044477928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherIdle_strip_NoBkg_6
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 52
+        width: 25
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95352275a9687cd459f25e026e3ead9a
+      internalID: 1986022568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherIdle_strip_NoBkg_7
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 52
+        width: 25
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c4ca790496073a41a766db2246fc847
+      internalID: 1386035343
       vertices: []
       indices: 
       edges: []
@@ -198,10 +282,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      _Attack_3: -1045066911
-      _Attack_2: 760871285
-      _Attack_0: -2070297237
-      _Attack_1: 2114984961
+      spr_ArcherIdle_strip_NoBkg_2: -1152382754
+      spr_ArcherIdle_strip_NoBkg_7: 1386035343
+      spr_ArcherIdle_strip_NoBkg_0: 847284511
+      spr_ArcherIdle_strip_NoBkg_6: 1986022568
+      spr_ArcherIdle_strip_NoBkg_5: 2044477928
+      spr_ArcherIdle_strip_NoBkg_4: 660002292
+      spr_ArcherIdle_strip_NoBkg_3: -1900036829
+      spr_ArcherIdle_strip_NoBkg_1: -1115367293
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

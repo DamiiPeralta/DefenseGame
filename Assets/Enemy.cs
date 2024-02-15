@@ -6,7 +6,6 @@ using TMPro;
 
 public class Enemy : MonoBehaviour
 {
-    
     public bool alive = true;
     public BoxCollider2D coll;
     public bool cooling;
@@ -23,12 +22,11 @@ public class Enemy : MonoBehaviour
     public float attackSpeed;
     public int level;
     public Animator animator;
-    public MercenaryController merc;
+    public GameObject merc; // Cambiado de MercenaryController a GameObject
 
     public GameObject popUpDamagePrefab;
 
     public float velocity = 3f;
-    
 
     public int enemyDamage = 1;
 
@@ -38,8 +36,6 @@ public class Enemy : MonoBehaviour
 
     public GameObject enemyInFrontObj;
 
-    
-
     void Start()
     {
         actualHealth = health;
@@ -48,26 +44,36 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(enemyInFrontObj == null)
+        if (enemyInFrontObj == null)
         {
             enemyInFront = false;
         }
-        if(enemyInFrontObj != null)
+        if (enemyInFrontObj != null)
         {
-            if(!enemyInFrontObj.GetComponent<Enemy>().alive)
+            if (!enemyInFrontObj.GetComponent<Enemy>().alive)
             {
                 enemyInFront = false;
                 enemyInFrontObj = null;
             }
         }
-        if(merc != null)
+        if (merc != null)
         {
-            if(!merc.stats.alive)
+            if (merc.GetComponent<MercenaryController>() != null)
             {
-                merc = null;
+                if (!merc.GetComponent<MercenaryController>().stats.alive)
+                {
+                    merc = null;
+                }
+            }
+            else if (merc.GetComponent<ArcherController>() != null)
+            {
+                if (!merc.GetComponent<ArcherController>().stats.alive)
+                {
+                    merc = null;
+                }
             }
         }
-        if(alive && merc == null && !enemyInFront)
+        if (alive && merc == null && !enemyInFront)
         {
             walk = true;
         }
@@ -76,18 +82,17 @@ public class Enemy : MonoBehaviour
             walk = false;
         }
         BattleLogic();
-        if(walk)
+        if (walk)
         {
             transform.Translate(Vector2.left * velocity * Time.deltaTime);
         }
-        if(enemyInFrontObj == null)
+        if (enemyInFrontObj == null)
         {
             enemyInFront = false;
         }
-        
+
     }
 
-    
     public void Attack(int minAtk, int maxAtk, int minMgk, int maxMgk)
     {
         System.Random randAtk = new System.Random();
@@ -96,20 +101,21 @@ public class Enemy : MonoBehaviour
         int mgkAttack = randAtk.Next(minMgk, maxMgk + 1);
         int atk = randMgk.Next(minAtk, maxAtk + 1);
         int totalDamage = atk + mgkAttack;
-        Debug.Log("the mgj atk is " + mgkAttack + " the attack is " + atk + "total damage =" + totalDamage + " left life = " + merc.actualHealth);
+        Debug.Log("the mgj atk is " + mgkAttack + " the attack is " + atk + "total damage =" + totalDamage + " left life = " + merc.GetComponent<MercenaryController>().stats.health);
 
 
-            merc.TakeDamage(mgkAttack, atk);
-            animator.SetBool("Attack", true);
-            //if(merc != null)
-            //{
-            //    
-            //    if(!merc.stats.alive)
-            //    {
-            //        merc = null;
-            //    }
-            //}
+        if (merc.GetComponent<MercenaryController>() != null)
+        {
+            merc.GetComponent<MercenaryController>().TakeDamage(mgkAttack, atk);
+        }
+        else if (merc.GetComponent<ArcherController>() != null)
+        {
+            merc.GetComponent<ArcherController>().TakeDamage(mgkAttack, atk);
+        }
+
+        animator.SetBool("Attack", true);
     }
+
     public void TakeDamage(int mgk, int atk)
     {
         int magicDamageText;
@@ -119,34 +125,26 @@ public class Enemy : MonoBehaviour
         magicDamageText = mgk - mgkdefense;
         attackDamageText = atk - defense;
 
-       // popUpDamagePrefab.GetComponent<PopUpText>().damageTextSpawnPoint = this.transform;
-        ///popUpDamagePrefab.GetComponent<PopUpText>().ShowDamageText(magicDamageText += attackDamageText);
         ShowDamageText(magicDamageText += attackDamageText);
 
-        if(actualHealth <= 0)
+        if (actualHealth <= 0)
         {
             GameManager.Instance.money += killReward;
             Death();
-               
         }
-        
     }
+
     public void ShowDamageText(int damageAmount)
     {
-        // Instanciar el Prefab del texto de daño
         GameObject damageTextObject = Instantiate(popUpDamagePrefab.GetComponent<PopUpText>().damageTextPrefab, transform.position, Quaternion.identity);
-        Debug.Log(transform.position);
-        // Establecer el objeto de texto como hijo del objeto al que le estás aplicando daño
         damageTextObject.transform.parent = transform;
-    
-        // Ajustar la posición relativa del objeto de texto
-        damageTextObject.transform.localPosition = new Vector3(0f, 2f, 0f); // Ajusta las coordenadas según tus necesidades
+        damageTextObject.transform.localPosition = new Vector3(0f, 2f, 0f);
 
         TextMeshPro damageText = damageTextObject.GetComponent<TextMeshPro>();
         damageText.text = damageAmount.ToString();
-        // Destruir el objeto de texto después de un tiempo
         Destroy(damageTextObject, 4f);
     }
+
     public void Death()
     {
         alive = false;
@@ -155,62 +153,66 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Merc")
+        if (other.tag == "Merc")
         {
-            merc = other.gameObject.GetComponent<MercenaryController>();
-            if(!merc.stats.alive)
-            {
-                merc = null;
-            }
+            merc = other.gameObject;
         }
-        if(other.tag == "EnemyBack")
+        else if (other.tag == "EnemyBack")
         {
             enemyInFront = true;
-            //enemyInFrontObj = other.gameObject;
-
-            // Accede al padre del objeto con el tag "EnemyBack"
-        Transform parentTransform = other.gameObject.transform.parent;
-
-        // Verifica si el padre existe antes de asignarlo
-        if (parentTransform != null)
-        {
-            // Obtén el GameObject del padre
-            GameObject parentObject = parentTransform.gameObject;
-            enemyInFrontObj = parentObject;
-
-            // Ahora puedes usar 'parentObject' como el GameObject del padre
-            // ...
+            Transform parentTransform = other.gameObject.transform.parent;
+            if (parentTransform != null)
+            {
+                GameObject parentObject = parentTransform.gameObject;
+                enemyInFrontObj = parentObject;
+            }
         }
-        }   
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.tag == "EnemyBack")
+        if (other.tag == "EnemyBack")
         {
             enemyInFront = false;
             enemyInFrontObj = null;
         }
     }
+
     public void BattleLogic()
     {
-        
-        if(merc != null)
+        if (merc != null)
         {
             walk = false;
-            if(merc.stats.alive)
+            if (merc.GetComponent<MercenaryController>() != null)
             {
-                if(!cooling)
+                if (merc.GetComponent<MercenaryController>().stats.alive)
                 {
-                    Attack(minAttack, maxAttack, minMgkattack, maxMgkattack);
-                    cooling = true;
+                    if (!cooling)
+                    {
+                        Attack(minAttack, maxAttack, minMgkattack, maxMgkattack);
+                        cooling = true;
+                    }
+                    else
+                    {
+                        Cooldown();
+                    }
                 }
-                else
+            }
+            else if (merc.GetComponent<ArcherController>() != null)
+            {
+                if (merc.GetComponent<ArcherController>().stats.alive)
                 {
-
-                    Cooldown();
+                    if (!cooling)
+                    {
+                        Attack(minAttack, maxAttack, minMgkattack, maxMgkattack);
+                        cooling = true;
+                    }
+                    else
+                    {
+                        Cooldown();
+                    }
                 }
             }
         }
@@ -218,24 +220,22 @@ public class Enemy : MonoBehaviour
         {
             BackToIdle();
             timer = attackSpeed;
-            
-        }       
+        }
     }
+
     public void BackToIdle()
     {
         animator.SetBool("Attack", false);
     }
+
     void Cooldown()
     {
-        
         timer -= Time.deltaTime;
 
         if (timer <= 0 && cooling)
         {
             cooling = false;
             timer = attackSpeed;
-
         }
     }
-    
 }

@@ -10,14 +10,12 @@ public class DragAndDrop : MonoBehaviour
     public GameObject merc;
     public MercenaryPlot mercPlot;
     public SpriteRenderer objSelected;
-    public MercenaryPlot mercPlotinWait;
     void Update()
     {
         if(merc != null)
         {
-            
             objSelected.enabled = true;
-            objSelected.sprite = merc.GetComponent<MercenaryController>().stats.stats.sprite;
+            objSelected.sprite = merc.gameObject.GetComponent<Stats>().sprite;
         }
         else
         {
@@ -38,4 +36,10 @@ public class DragAndDrop : MonoBehaviour
         posicionMouse.z = transform.position.z;
         transform.position = posicionMouse;
     }
+}
+public enum MercenaryType
+{
+    Archer,
+    Warrior,
+    Mage
 }

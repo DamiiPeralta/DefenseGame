@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289d0ff28c35d06498553f2b596713e2, type: 3}
+  m_Name: archer
+  m_EditorClassIdentifier: 
+  mercName: archer
+  sprite: {fileID: -119330188, guid: 01d8c4a82a5ffbd45a3b3de3ee35bf4e, type: 3}
+  alive: 1
+  maxAttack: 5
+  minAttack: 0
+  maxMgkattack: 5
+  minMgkattack: 0
+  defense: 1
+  mgkdefense: 1
+  attackSpeed: 1
+  strenght: 0
+  dexterity: 0
+  inteligence: 0
+  vigor: 0
+  mind: 0
+  health: 10
+  mana: 5
+  level: 1
+  exp: 0
+  nLExp: 0
+  mercenaryObj: {fileID: 5088159694083851845, guid: ed4899400c113a346a5a166bdd71e602, type: 3}

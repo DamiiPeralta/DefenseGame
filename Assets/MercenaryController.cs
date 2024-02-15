@@ -6,6 +6,7 @@ using UnityEngine.Timeline;
 
 public class MercenaryController : MonoBehaviour
 {
+    // Tipo de mercenario
     public MercenaryStats mercenaryStats;
 
     public Stats stats;

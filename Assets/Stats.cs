@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
 {
+    public MercenaryType mercenaryType;
     public MercenaryStats stats;
     public Sprite sprite;
     public string mercName;
