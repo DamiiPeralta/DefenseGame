@@ -8,8 +8,6 @@ public class Bullet : MonoBehaviour
     
     public int maxAttack;
     public int minAttack;
-    public int maxMgkattack;
-    public int minMgkattack;
     public Enemy enemyTarget;
     void Start()
     {
@@ -27,23 +25,20 @@ public class Bullet : MonoBehaviour
             // Verificar si el componente de vida del enemigo es válido
             if (enemy != null)
             {
-                Attack(minAttack, maxAttack, minMgkattack, maxMgkattack);
+                Attack(minAttack, maxAttack);
             }
         }
     }
 
-    public void Attack(int minAtk, int maxAtk, int minMgk, int maxMgk)
+    public void Attack(int minAtk, int maxAtk)
     {
         System.Random randAtk = new System.Random();
-        System.Random randMgk = new System.Random();
-
-        int mgkAttack = randAtk.Next(minMgk, maxMgk + 1);
-        int atk = randMgk.Next(minAtk, maxAtk + 1);
-        int totalDamage = atk - enemyTarget.defense + mgkAttack - enemyTarget.mgkdefense;
-        Debug.Log("the mgj atk is " + mgkAttack + " the attack is " + atk + "total damage =" + totalDamage + " left life = " + enemyTarget.actualHealth);
+        int atk = randAtk.Next(minAtk, maxAtk + 1);
+        int totalDamage = atk - enemyTarget.defense;
+        Debug.Log(" the attack is " + atk + "total damage =" + totalDamage + " left life = " + enemyTarget.actualHealth);
 
 
-        enemyTarget.TakeDamage(mgkAttack, atk);
+        enemyTarget.TakeDamage(atk);
         Destroy(gameObject);
     }
 }

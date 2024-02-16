@@ -15,10 +15,7 @@ public class Enemy : MonoBehaviour
     public int actualHealth;
     public int maxAttack;
     public int minAttack;
-    public int maxMgkattack;
-    public int minMgkattack;
     public int defense;
-    public int mgkdefense;
     public float attackSpeed;
     public int level;
     public Animator animator;
@@ -58,19 +55,9 @@ public class Enemy : MonoBehaviour
         }
         if (merc != null)
         {
-            if (merc.GetComponent<MercenaryController>() != null)
+            if (!merc.GetComponent<MercenaryController>().stats.alive)
             {
-                if (!merc.GetComponent<MercenaryController>().stats.alive)
-                {
-                    merc = null;
-                }
-            }
-            else if (merc.GetComponent<ArcherController>() != null)
-            {
-                if (!merc.GetComponent<ArcherController>().stats.alive)
-                {
-                    merc = null;
-                }
+                merc = null;
             }
         }
         if (alive && merc == null && !enemyInFront)
@@ -93,39 +80,30 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void Attack(int minAtk, int maxAtk, int minMgk, int maxMgk)
+    public void Attack(int minAtk, int maxAtk)
     {
         System.Random randAtk = new System.Random();
-        System.Random randMgk = new System.Random();
 
-        int mgkAttack = randAtk.Next(minMgk, maxMgk + 1);
-        int atk = randMgk.Next(minAtk, maxAtk + 1);
-        int totalDamage = atk + mgkAttack;
-        Debug.Log("the mgj atk is " + mgkAttack + " the attack is " + atk + "total damage =" + totalDamage + " left life = " + merc.GetComponent<MercenaryController>().stats.health);
+        int atk = randAtk.Next(minAtk, maxAtk + 1);
+        int totalDamage = atk;
+        Debug.Log(" the attack is " + atk + "total damage =" + totalDamage + " left life = " + merc.GetComponent<Stats>().health);
 
 
         if (merc.GetComponent<MercenaryController>() != null)
         {
-            merc.GetComponent<MercenaryController>().TakeDamage(mgkAttack, atk);
-        }
-        else if (merc.GetComponent<ArcherController>() != null)
-        {
-            merc.GetComponent<ArcherController>().TakeDamage(mgkAttack, atk);
+            merc.GetComponent<MercenaryController>().TakeDamage(atk);
         }
 
         animator.SetBool("Attack", true);
     }
 
-    public void TakeDamage(int mgk, int atk)
+    public void TakeDamage(int atk)
     {
-        int magicDamageText;
         int attackDamageText;
-        actualHealth -= Mathf.Max(0, mgk - mgkdefense);
         actualHealth -= Mathf.Max(0, atk - defense);
-        magicDamageText = mgk - mgkdefense;
         attackDamageText = atk - defense;
 
-        ShowDamageText(magicDamageText += attackDamageText);
+        ShowDamageText(attackDamageText);
 
         if (actualHealth <= 0)
         {
@@ -191,22 +169,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (!cooling)
                     {
-                        Attack(minAttack, maxAttack, minMgkattack, maxMgkattack);
-                        cooling = true;
-                    }
-                    else
-                    {
-                        Cooldown();
-                    }
-                }
-            }
-            else if (merc.GetComponent<ArcherController>() != null)
-            {
-                if (merc.GetComponent<ArcherController>().stats.alive)
-                {
-                    if (!cooling)
-                    {
-                        Attack(minAttack, maxAttack, minMgkattack, maxMgkattack);
+                        Attack(minAttack, maxAttack);
                         cooling = true;
                     }
                     else

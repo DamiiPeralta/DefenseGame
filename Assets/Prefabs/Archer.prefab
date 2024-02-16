@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5088159694083851844}
   - component: {fileID: 5088159694083851840}
   - component: {fileID: 8523023384245828168}
-  - component: {fileID: 6686142869704495588}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Merc
@@ -146,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621b4843c41ec14ead29d6f183152fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mercenaryType: 0
   stats: {fileID: 11400000, guid: 22c5fab02075b2d41a51d0e543b7b80b, type: 2}
   sprite: {fileID: 0}
   mercName: 
@@ -167,24 +167,3 @@ MonoBehaviour:
   level: 0
   exp: 0
   nLExp: 0
---- !u!114 &6686142869704495588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5088159694083851845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af752d4fe7fc5541b394e1df24f5fa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 0}
-  arrowSpawnPoint: {fileID: 0}
-  arrowSpeed: 10
-  meleeRange: 2
-  distanceRange: 10
-  attackCooldown: 1.5
-  meleInRange: 0
-  distanceInRange: 0
-  anim: {fileID: 0}

@@ -166,8 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621b4843c41ec14ead29d6f183152fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mercenaryType: 0
   stats: {fileID: 11400000, guid: 22c5fab02075b2d41a51d0e543b7b80b, type: 2}
-  sprite: {fileID: 0}
+  sprite: {fileID: -2042377501, guid: 17d96295c8cc38f49b9e4cfd8ff63674, type: 3}
   mercName: 
   alive: 0
   maxAttack: 0

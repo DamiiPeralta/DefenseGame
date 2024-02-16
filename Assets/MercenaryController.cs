@@ -34,26 +34,22 @@ public class MercenaryController : MonoBehaviour
         BattleLogic();
     }
 
-    public void Attack(int minAtk, int maxAtk, int minMgk, int maxMgk)
+    public void Attack(int minAtk, int maxAtk)
     {
         System.Random randAtk = new System.Random();
-        System.Random randMgk = new System.Random();
+        int atk = randAtk.Next(minAtk, maxAtk + 1);
+        int totalDamage = atk - enemy.defense;
+        Debug.Log(" the attack is " + atk + "total damage =" + totalDamage + " left life = " + enemy.actualHealth);
 
-        int mgkAttack = randAtk.Next(minMgk, maxMgk + 1);
-        int atk = randMgk.Next(minAtk, maxAtk + 1);
-        int totalDamage = atk - enemy.defense + mgkAttack - enemy.mgkdefense;
-        Debug.Log("the mgj atk is " + mgkAttack + " the attack is " + atk + "total damage =" + totalDamage + " left life = " + enemy.actualHealth);
-
-        enemy.TakeDamage(mgkAttack, atk);
+        enemy.TakeDamage(atk);
         animator.SetBool("Attack", true);
         if(!enemy.alive)
         {
             enemy = null;
         }
     }
-    public void TakeDamage(int mgk, int atk)
+    public void TakeDamage(int atk)
     {
-        actualHealth -= Mathf.Max(0, mgk - stats.mgkdefense);
         actualHealth -= Mathf.Max(0, atk - stats.defense);
         
         if(actualHealth <= 0)
@@ -103,7 +99,7 @@ public class MercenaryController : MonoBehaviour
                 {
                     if(!cooling)
                     {
-                        Attack(stats.minAttack, stats.maxAttack, stats.minMgkattack, stats.maxMgkattack);
+                        Attack(stats.minAttack, stats.maxAttack);
                         cooling = true;
                     }
                     else
